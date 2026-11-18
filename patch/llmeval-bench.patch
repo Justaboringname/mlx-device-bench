@@ -1,0 +1,33 @@
+diff --git a/Applications/LLMEval/LLMEvalApp.swift b/Applications/LLMEval/LLMEvalApp.swift
+index 8e29db0..3047e40 100644
+--- a/Applications/LLMEval/LLMEvalApp.swift
++++ b/Applications/LLMEval/LLMEvalApp.swift
+@@ -6,8 +6,14 @@ import SwiftUI
+ struct LLMEvalApp: App {
+     var body: some Scene {
+         WindowGroup {
+-            ContentView()
+-                .environment(DeviceStat())
++            // Local addition (not upstream): `--bench` runs the headless
++            // benchmark in Benchmark.swift instead of the interactive UI.
++            if CommandLine.arguments.contains("--bench") {
++                BenchView()
++            } else {
++                ContentView()
++                    .environment(DeviceStat())
++            }
+         }
+     }
+ }
+diff --git a/mlx-swift-examples.xcodeproj/project.pbxproj b/mlx-swift-examples.xcodeproj/project.pbxproj
+index 87ab36c..1f94937 100644
+--- a/mlx-swift-examples.xcodeproj/project.pbxproj
++++ b/mlx-swift-examples.xcodeproj/project.pbxproj
+@@ -299,6 +299,7 @@
+ 			membershipExceptions = (
+ 				LLMEval/AppIcon.icon,
+ 				LLMEval/AssetCatalog.xcassets,
++				LLMEval/Benchmark.swift,
+ 				LLMEval/LLMEvalApp.swift,
+ 				LLMEval/Models/CarKeysStory.md,
+ 				LLMEval/Models/LongPrompt.md,
