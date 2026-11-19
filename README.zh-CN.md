@@ -6,6 +6,12 @@
 
 表格里的所有数字都是用 `python3 bench/summarize.py <log> [power.jsonl]` 从 [`results/`](results) 里的文件算出来的（每次测试的输出在 [`results/summaries/`](results/summaries)）。比值、乘积和每 token 能耗是在这些输出上做的算术；第 2 节的"安静空闲基线"按那里的说明直接从 Mac 功耗文件计算。有些说法依据的是工作中的记录，这些记录不在本仓库里：NAX 开关是怎么验证的（构建命令、二进制符号、调用栈采样）、Mac 最终那次测试前后的进程检查，以及手机的测试条件（手机壳、散热器、亮度）。
 
+## 宣传片
+
+一分钟的短片,讲的是这里的测量结果,以及 [Pocket LLM](https://github.com/Justaboringname/pocket-llm)——一个用这些数据选默认模型的 iPhone 聊天 app。片中的手机画面和 Mac 上的基准窗口都是录屏,大字用的是下面表格里的中位数。Mac 窗口是后来另跑的一次较短的同款基准,所以它日志里是 296–297 tok/s,而表格里是 304.7。
+
+https://github.com/user-attachments/assets/d8ab1fb9-eb3f-4aab-80b2-2472c0d2402f
+
 ## 1. Mac 对比 iPhone
 
 每项取一次预热之后 3 次正式运行的中位数。"gen" 是 48 token 的提示后生成 256 个 token；"prefill" 是 10,073 token 的提示后生成 16 个 token。TTFT 指从开始生成到拿到第一段文本的墙钟时间。峰值内存是 MLX 分配器在该模型加载和全部运行期间的峰值，不是整个进程的内存。

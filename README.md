@@ -6,6 +6,12 @@ This repository adds a headless benchmark mode to the LLMEval example app from A
 
 All numbers in the tables are computed from the files in [`results/`](results) with `python3 bench/summarize.py <log> [power.jsonl]` (its output for every run is in [`results/summaries/`](results/summaries)). Ratios, products and per-token energies are arithmetic on that output; the quiet-idle baseline in section 2 is computed directly from the Mac power file, as described there. Some statements rest on notes taken during the work that are not included in this repository: how the NAX switch was verified (build commands, binary symbols, stack samples), the process checks around the final Mac run, and the phone setup (case, cooler, brightness).
 
+## Film
+
+A one-minute film of these measurements and of [Pocket LLM](https://github.com/Justaboringname/pocket-llm), the iPhone chat app that used them to pick its default model. The phone footage and the Mac benchmark window in it are screen recordings, and the large figures are the medians from the tables below. The Mac window was recorded during a later, shorter run of the same benchmark, so its log reads 296–297 tok/s where the table has 304.7.
+
+https://github.com/user-attachments/assets/d8ab1fb9-eb3f-4aab-80b2-2472c0d2402f
+
 ## 1. Mac vs iPhone
 
 Medians of 3 measured runs after one warm-up run. "gen" = 256 generated tokens after a 48-token prompt; "prefill" = a 10,073-token prompt followed by 16 generated tokens. TTFT = wall time from the start of generation to the first text chunk. Peak memory = the MLX allocator's peak for the model (load + all runs), not the process's total memory.
