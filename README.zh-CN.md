@@ -1,14 +1,39 @@
-# mlx-device-bench
+<div align="center">
 
-[English](README.md) | 简体中文
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/hero-dark.svg">
+  <img src="assets/hero-light.svg" width="100%" alt="mlx-device-bench，用 Apple MLX 在 Mac Studio（M5 Max）和 iPhone 18 Pro Max 上做的端侧大模型基准测试：速度、功耗、发热降频，以及神经加速器开关的消融实验。生成速度中位数：Qwen3-1.7B-4bit 在 Mac 上 304.7 token/s，iPhone 上 99.7；Qwen3-4B-4bit 分别为 147.9 和 44.6。">
+</picture>
 
-这个仓库给 Apple [mlx-swift-examples](https://github.com/ml-explore/mlx-swift-examples) 里的 LLMEval 示例 app 加了一个无界面的基准测试模式，用同一套固定的贪心解码负载在 Mac Studio（M5 Max）和 iPhone 18 Pro Max 上运行，同时记录功耗。用 Qwen3-1.7B-4bit 和 Qwen3-4B-4bit 两个模型测，Mac 的生成速度是手机的 3.1–3.3 倍，处理 10,073 token 长提示的速度是手机的 4.4–4.6 倍，两台设备输出的哈希完全一致。手机连续生成 100 秒时整机功耗为 11.0–11.9 W；在 Mac 上关掉 MLX 的神经加速器矩阵乘路径（NAX）后，提示处理只剩正常速度的 0.28–0.31 倍（取决于用哪个指标），而持续生成时按每次迭代中位数算的解码速度只差约 2 %（短测中位数波动更大，4B 最多差 -9 %）。
+<br>
 
-表格里的所有数字都是用 `python3 bench/summarize.py <log> [power.jsonl]` 从 [`results/`](results) 里的文件算出来的（每次测试的输出在 [`results/summaries/`](results/summaries)）。比值、乘积和每 token 能耗是在这些输出上做的算术；第 2 节的"安静空闲基线"按那里的说明直接从 Mac 功耗文件计算。有些说法依据的是工作中的记录，这些记录不在本仓库里：NAX 开关是怎么验证的（构建命令、二进制符号、调用栈采样）、Mac 最终那次测试前后的进程检查，以及手机的测试条件（手机壳、散热器、亮度）。
+[![License: MIT](https://img.shields.io/badge/license-MIT-788c5d?style=flat-square)](LICENSE)
+![mlx-swift 0.31.4](https://img.shields.io/badge/mlx--swift-0.31.4-788c5d?style=flat-square)
+![Python 3](https://img.shields.io/badge/python-3-788c5d?style=flat-square)
+![Benchmark: Mac vs iPhone](https://img.shields.io/badge/benchmark-Mac%20vs%20iPhone-d97757?style=flat-square)
+
+[English](README.md) · **简体中文**
+
+**同一套 Apple MLX 负载跑在 Mac 和 iPhone 上：速度、功耗、发热降频，外加神经加速器开关的消融实验。**
+
+</div>
+
+这个仓库给 Apple [mlx-swift-examples](https://github.com/ml-explore/mlx-swift-examples) 里的 LLMEval 示例 app 加了一个无界面的基准测试模式，用同一套固定的贪心解码负载在 Mac Studio（M5 Max）和 iPhone 18 Pro Max 上运行，同时记录功耗。
+
+用 Qwen3-1.7B-4bit 和 Qwen3-4B-4bit 两个模型测：
+
+- **速度。** Mac 的生成速度是手机的 3.1–3.3 倍，处理 10,073 token 长提示的速度是手机的 4.4–4.6 倍。
+- **输出一致。** 两台设备输出的哈希完全一致。
+- **手机功耗。** 手机连续生成 100 秒时整机功耗为 11.0–11.9 W。
+- **Mac 上的 NAX 消融。** 关掉 MLX 的神经加速器矩阵乘路径（NAX）后，提示处理只剩正常速度的 0.28–0.31 倍（取决于用哪个指标）。持续生成时按每次迭代中位数算的解码速度只差约 2 %（短测中位数波动更大，4B 最多差 -9 %）。
+
+**数字从哪来。** 表格里的所有数字都是用 `python3 bench/summarize.py <log> [power.jsonl]` 从 [`results/`](results) 里的文件算出来的（每次测试的输出在 [`results/summaries/`](results/summaries)）。比值、乘积和每 token 能耗是在这些输出上做的算术；第 2 节的"安静空闲基线"按那里的说明直接从 Mac 功耗文件计算。
+
+**不在本仓库里的。** 有些说法依据的是工作中的记录，这些记录不在本仓库里：NAX 开关是怎么验证的（构建命令、二进制符号、调用栈采样）、Mac 最终那次测试前后的进程检查，以及手机的测试条件（手机壳、散热器、亮度）。
 
 ## 宣传片
 
-一分钟的短片,讲的是这里的测量结果,以及 [Pocket LLM](https://github.com/Justaboringname/pocket-llm)——一个用这些数据选默认模型的 iPhone 聊天 app。片中的手机画面和 Mac 上的基准窗口都是录屏,大字用的是下面表格里的中位数。Mac 窗口是后来另跑的一次较短的同款基准,所以它日志里是 296–297 tok/s,而表格里是 304.7。
+一分钟的短片，讲的是这里的测量结果，以及 [Pocket LLM](https://github.com/Justaboringname/pocket-llm)——一个用这些数据选默认模型的 iPhone 聊天 app。片中的手机画面和 Mac 上的基准窗口都是录屏，大字用的是下面表格里的中位数。Mac 窗口是后来另跑的一次较短的同款基准，所以它日志里是 296–297 tok/s，而表格里是 304.7。
 
 https://github.com/user-attachments/assets/d8ab1fb9-eb3f-4aab-80b2-2472c0d2402f
 
@@ -29,7 +54,13 @@ https://github.com/user-attachments/assets/d8ab1fb9-eb3f-4aab-80b2-2472c0d2402f
 
 生成用的是温度 0（贪心）。每种构建在每次运行里都给出同样的文本，两台设备的输出哈希（生成文本的 64 位 FNV-1a）也完全一致：1.7B gen `799ec6e941b85604`，1.7B prefill `0d02202ec08edfed`，4B gen `c563528899d11540`，4B prefill `49d1a6036bfc4348`。Mac 这一列来自单独一次测试（见注意事项）。
 
-设备：Mac Studio（`Mac17,14`，Apple M5 Max，GPU `applegpu_g17s`），macOS 27.2.1 (Build 26B131)；iPhone 18 Pro Max（`iPhone19,3` / `V64AP`，GPU `applegpu_g19p`），iOS 27.2.1 (Build 24B156)。
+**设备。**
+
+| | Mac Studio（M5 Max） | iPhone 18 Pro Max |
+|---|---|---|
+| 型号标识 | `Mac17,14` | `iPhone19,3` / `V64AP` |
+| 芯片 / GPU | Apple M5 Max，GPU `applegpu_g17s` | GPU `applegpu_g19p` |
+| 系统 | macOS 27.2.1 (Build 26B131) | iOS 27.2.1 (Build 24B156) |
 
 ## 2. 持续负载与功耗
 
@@ -64,7 +95,14 @@ https://github.com/user-attachments/assets/d8ab1fb9-eb3f-4aab-80b2-2472c0d2402f
 | 空闲阶段，设定 / 实测 | 60 秒 / 60.1 秒 | 90 秒 / 95.9 秒 |
 | app 构建 | 较早的 `Benchmark.swift` 构建（见注意事项） | 与发布的 `Benchmark.swift` 事件和选项相同 |
 
-第 1 次测试里，4B 模型每次迭代的速度在 100 秒内从 44.5 降到 39.5 token/s（-11.4 %），热状态同时升到 2；第 2 次测试全程保持在热状态 0，速度不变。两次手机都插着 USB 供电、没有在充电（电量 80 %），外部输入覆盖了 `SystemLoad` 的 97–100 %。
+第 1 次测试里，4B 模型每次迭代的速度在 100 秒内从 44.5 降到 39.5 token/s（-11.4 %），热状态同时升到 2；第 2 次测试全程保持在热状态 0，速度不变。下图每个点是一次迭代，取自 [`results/`](results) 里两份手机日志的 `run` 事件。
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/thermal-dark.svg">
+  <img src="assets/thermal-light.svg" width="100%" alt="Qwen3-4B-4bit 在 iPhone 18 Pro Max 上连续生成 100 秒时每次迭代的 token/s。第 1 次测试（带壳、无散热）前约 40 秒保持 44.5，之后掉到 39 左右，结束时 39.5，热状态从 1 升到 2。第 2 次测试（去壳、外置散热）始终是 44.7，热状态 0。">
+</picture>
+
+两次手机都插着 USB 供电、没有在充电（电量 80 %），外部输入覆盖了 `SystemLoad` 的 97–100 %。
 
 ### Mac Studio，M5 Max（只算 GPU；同时给出 DRAM 和 Mac 整机功耗）
 
@@ -96,6 +134,11 @@ MLX 可以把矩阵乘、量化矩阵乘和注意力交给用到 GPU 神经加�
 这个函数接受 Mac 的 GPU（`applegpu_g17s`）。按同样的判断，它也接受 iOS 27.2.1 (Build 24B156) 上 iPhone 的 GPU（`applegpu_g19p`），所以上面手机的数字应该也是开着 NAX 测的。这一点是从源码推断的，没有在手机上用符号或调用栈采样确认。
 
 同样的测试（另加 30 秒空闲、100 秒持续生成和 60 秒持续预填充）在 Mac 上按 NAX 开、NAX 关、NAX 开的顺序各跑了一次。这三次测试用的是较早版本的补丁，那时还没有 `--bench-phase-cooldown`（这三次也用不到）。它们还多传了一个 `--bench-variant=nax-on` / `nax-off` 标签，参数解析会忽略它。
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/nax-dark.svg">
+  <img src="assets/nax-light.svg" width="100%" alt="三次消融测试的柱状图，顺序是 NAX 开、NAX 关、NAX 开。提示处理（持续预填充每次迭代的中位数，提示 token/s）：Qwen3-1.7B-4bit 为 8,837、2,489、8,785，关 ÷ 开的均值 0.28；Qwen3-4B-4bit 为 3,672、1,027、3,669，0.28。解码（持续生成每次迭代的中位数，token/s）：1.7B 为 302.3、296.0、300.9，0.98；4B 为 145.3、139.4、138.9，0.98。">
+</picture>
 
 | 模型 | 指标 | NAX 开（1） | NAX 关 | NAX 开（2） | 关 ÷ 开的均值 | 开(2) ÷ 开(1) |
 |---|---|---|---|---|---|---|

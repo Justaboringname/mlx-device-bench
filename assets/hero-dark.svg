@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="420" viewBox="0 0 1280 420" role="img" aria-labelledby="t">
+<title id="t">mlx-device-bench: the same greedy MLX workload on a Mac Studio (M5 Max) and an iPhone 18 Pro Max. Median generation speed: Qwen3-1.7B-4bit 304.7 tokens/s on the Mac and 99.7 on the iPhone; Qwen3-4B-4bit 147.9 and 44.6.</title>
+<style>
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif; }
+.mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+.tx { fill: #ecece8; }
+.mu { fill: #9b9a94; }
+.clay { fill: #d97757; }
+.sage { fill: #9bb07c; }
+.eyebrow { font-size: 22px; letter-spacing: 4px; }
+.title { font-weight: 700; letter-spacing: -1.5px; }
+.tag { font-size: 28px; }
+.node { font-size: 24px; font-weight: 600; }
+.sub { font-size: 22px; }
+.cap { font-size: 22px; }
+.small { font-size: 20px; }
+.num { font-variant-numeric: tabular-nums; }
+</style>
+<rect x="0.5" y="0.5" width="1279" height="419" rx="20" fill="#181818" stroke="#2f2f2f" stroke-width="1"/>
+<text class="mono eyebrow mu" x="72" y="104">ON-DEVICE LLM BENCHMARK</text>
+<text class="sans title tx" x="68" y="190" style="font-size:64px">mlx-device-bench</text>
+<text class="sans tag mu" x="72" y="250">Apple MLX on a Mac and an iPhone.</text>
+<text class="sans tag mu" x="72" y="290">Speed, power, thermal throttling.</text>
+<text class="sans tag mu" x="72" y="330">Neural-accelerator on/off ablation.</text>
+<text class="mono cap mu" x="700" y="104">generation · median tokens/s</text>
+<text class="sans node tx" x="700" y="152">Qwen3-1.7B-4bit</text>
+<rect x="700" y="166" width="400.0" height="20" rx="4" fill="#d97757"/>
+<text class="mono small num tx" x="1114.0" y="183">304.7</text>
+<rect x="700" y="194" width="130.9" height="20" rx="4" fill="#9bb07c"/>
+<text class="mono small num tx" x="844.9" y="211">99.7</text>
+<text class="sans node tx" x="700" y="254">Qwen3-4B-4bit</text>
+<rect x="700" y="268" width="194.2" height="20" rx="4" fill="#d97757"/>
+<text class="mono small num tx" x="908.2" y="285">147.9</text>
+<rect x="700" y="296" width="58.5" height="20" rx="4" fill="#9bb07c"/>
+<text class="mono small num tx" x="772.5" y="313">44.6</text>
+<circle cx="706" cy="349" r="6" fill="#d97757"/>
+<text class="sans small mu" x="722" y="356">Mac Studio · M5 Max</text>
+<circle cx="956" cy="349" r="6" fill="#9bb07c"/>
+<text class="sans small mu" x="972" y="356">iPhone 18 Pro Max</text>
+</svg>

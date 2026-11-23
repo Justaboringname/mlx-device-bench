@@ -1,10 +1,33 @@
-# mlx-device-bench
+<div align="center">
 
-English | [简体中文](README.zh-CN.md)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/hero-dark.svg">
+  <img src="assets/hero-light.svg" width="100%" alt="mlx-device-bench, an on-device LLM benchmark with Apple MLX on a Mac Studio (M5 Max) and an iPhone 18 Pro Max: speed, power, thermal throttling and a neural-accelerator on/off ablation. Median generation speed: Qwen3-1.7B-4bit 304.7 tokens/s on the Mac and 99.7 on the iPhone; Qwen3-4B-4bit 147.9 and 44.6.">
+</picture>
 
-This repository adds a headless benchmark mode to the LLMEval example app from Apple's [mlx-swift-examples](https://github.com/ml-explore/mlx-swift-examples) and uses it to run the same fixed, greedy workload on a Mac Studio (M5 Max) and an iPhone 18 Pro Max, reading power while the workload runs. With Qwen3-1.7B-4bit and Qwen3-4B-4bit, the Mac generates text 3.1–3.3× faster and processes a 10,073-token prompt 4.4–4.6× faster than the phone, and both devices produce identical output hashes. During 100 s of continuous generation the whole phone draws 11.0–11.9 W; on the Mac, switching off MLX's neural-accelerator matmul path (NAX) cuts prompt processing to 0.28–0.31× of normal speed (depending on the metric), while per-iteration decode speed during sustained generation changes by about 2 % (short-run medians are noisier, up to -9 % for 4B).
+<br>
 
-All numbers in the tables are computed from the files in [`results/`](results) with `python3 bench/summarize.py <log> [power.jsonl]` (its output for every run is in [`results/summaries/`](results/summaries)). Ratios, products and per-token energies are arithmetic on that output; the quiet-idle baseline in section 2 is computed directly from the Mac power file, as described there. Some statements rest on notes taken during the work that are not included in this repository: how the NAX switch was verified (build commands, binary symbols, stack samples), the process checks around the final Mac run, and the phone setup (case, cooler, brightness).
+[![License: MIT](https://img.shields.io/badge/license-MIT-788c5d?style=flat-square)](LICENSE)
+![mlx-swift 0.31.4](https://img.shields.io/badge/mlx--swift-0.31.4-788c5d?style=flat-square)
+![Python 3](https://img.shields.io/badge/python-3-788c5d?style=flat-square)
+![Benchmark: Mac vs iPhone](https://img.shields.io/badge/benchmark-Mac%20vs%20iPhone-d97757?style=flat-square)
+
+**English** · [简体中文](README.zh-CN.md)
+
+</div>
+
+This repository adds a headless benchmark mode to the LLMEval example app from Apple's [mlx-swift-examples](https://github.com/ml-explore/mlx-swift-examples). With it, the same fixed, greedy workload runs on a Mac Studio (M5 Max) and an iPhone 18 Pro Max, and power is read while the workload runs.
+
+With Qwen3-1.7B-4bit and Qwen3-4B-4bit:
+
+- **Speed.** The Mac generates text 3.1–3.3× faster and processes a 10,073-token prompt 4.4–4.6× faster than the phone.
+- **Same output.** Both devices produce identical output hashes.
+- **Phone power.** During 100 s of continuous generation the whole phone draws 11.0–11.9 W.
+- **NAX ablation on the Mac.** Switching off MLX's neural-accelerator matmul path (NAX) cuts prompt processing to 0.28–0.31× of normal speed (depending on the metric). Per-iteration decode speed during sustained generation changes by about 2 % (short-run medians are noisier, up to -9 % for 4B).
+
+**Where the numbers come from.** All numbers in the tables are computed from the files in [`results/`](results) with `python3 bench/summarize.py <log> [power.jsonl]` (its output for every run is in [`results/summaries/`](results/summaries)). Ratios, products and per-token energies are arithmetic on that output; the quiet-idle baseline in section 2 is computed directly from the Mac power file, as described there.
+
+**Not in this repository.** Some statements rest on notes taken during the work that are not included here: how the NAX switch was verified (build commands, binary symbols, stack samples), the process checks around the final Mac run, and the phone setup (case, cooler, brightness).
 
 ## Film
 
@@ -29,7 +52,13 @@ Medians of 3 measured runs after one warm-up run. "gen" = 256 generated tokens a
 
 Generation uses temperature 0 (greedy). Each build gave the same text in every run, and the output hashes (64-bit FNV-1a of the generated text) are identical on both devices: 1.7B gen `799ec6e941b85604`, 1.7B prefill `0d02202ec08edfed`, 4B gen `c563528899d11540`, 4B prefill `49d1a6036bfc4348`. The Mac column comes from a single session (see caveats).
 
-Devices: Mac Studio (`Mac17,14`, Apple M5 Max, GPU `applegpu_g17s`), macOS 27.2.1 (Build 26B131); iPhone 18 Pro Max (`iPhone19,3` / `V64AP`, GPU `applegpu_g19p`), iOS 27.2.1 (Build 24B156).
+**Devices.**
+
+| | Mac Studio (M5 Max) | iPhone 18 Pro Max |
+|---|---|---|
+| model identifier | `Mac17,14` | `iPhone19,3` / `V64AP` |
+| chip / GPU | Apple M5 Max, GPU `applegpu_g17s` | GPU `applegpu_g19p` |
+| OS | macOS 27.2.1 (Build 26B131) | iOS 27.2.1 (Build 24B156) |
 
 ## 2. Sustained load and power
 
@@ -64,7 +93,14 @@ Thermal state is iOS's `ProcessInfo.thermalState` (0 nominal, 1 fair, 2 serious,
 | idle phase, requested / measured | 60 s / 60.1 s | 90 s / 95.9 s |
 | app build | earlier build of `Benchmark.swift` (see caveats) | same events and options as the published `Benchmark.swift` |
 
-In run 1 the 4B model's per-iteration speed went from 44.5 to 39.5 tokens/s (-11.4 %) over the 100 s while the thermal state rose to 2; in run 2 it stayed flat at thermal state 0. In both runs the phone was on USB power and not charging (battery level 80 %); external input covered 97–100 % of `SystemLoad`.
+In run 1 the 4B model's per-iteration speed went from 44.5 to 39.5 tokens/s (-11.4 %) over the 100 s while the thermal state rose to 2; in run 2 it stayed flat at thermal state 0. Each point below is one iteration, read from the `run` events in the two phone logs in [`results/`](results).
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/thermal-dark.svg">
+  <img src="assets/thermal-light.svg" width="100%" alt="Qwen3-4B-4bit on the iPhone 18 Pro Max, tokens/s of each iteration during 100 s of continuous generation. Run 1, in a case with no cooler, holds 44.5 for about 40 s, then drops to about 39 and ends at 39.5 while the thermal state rises from 1 to 2. Run 2, with no case and an external cooler, stays at 44.7 with thermal state 0.">
+</picture>
+
+In both runs the phone was on USB power and not charging (battery level 80 %); external input covered 97–100 % of `SystemLoad`.
 
 ### Mac Studio, M5 Max (GPU only; DRAM and whole-Mac system power alongside)
 
@@ -96,6 +132,11 @@ MLX can route matrix multiplications, quantized matrix multiplications and atten
 The function accepts the Mac's GPU (`applegpu_g17s`). By the same check it also accepts the iPhone's GPU (`applegpu_g19p`) on iOS 27.2.1 (Build 24B156), so the phone numbers above are presumably NAX-on as well. That is inferred from the source; it was not checked with symbols or stack samples on the phone.
 
 The same benchmark (plus a 30 s idle phase, 100 s sustain and 60 s sustain-prefill) was run three times on the Mac, in the order NAX on, NAX off, NAX on. These three runs used an earlier revision of the patch that did not yet have `--bench-phase-cooldown` (not used in them). They also passed an extra `--bench-variant=nax-on` / `nax-off` label, which the argument parser ignores.
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/nax-dark.svg">
+  <img src="assets/nax-light.svg" width="100%" alt="Bar chart of the three ablation runs in order NAX on, NAX off, NAX on. Prompt processing, sustain-prefill per-iteration median in prompt tokens/s: Qwen3-1.7B-4bit 8,837, 2,489 and 8,785, off divided by mean(on) 0.28; Qwen3-4B-4bit 3,672, 1,027 and 3,669, 0.28. Decode, sustain per-iteration median in tokens/s: 1.7B 302.3, 296.0 and 300.9, 0.98; 4B 145.3, 139.4 and 138.9, 0.98.">
+</picture>
 
 | model | metric | NAX on (1) | NAX off | NAX on (2) | off ÷ mean(on) | on(2) ÷ on(1) |
 |---|---|---|---|---|---|---|

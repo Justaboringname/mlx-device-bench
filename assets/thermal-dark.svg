@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="540" viewBox="0 0 1280 540" role="img" aria-labelledby="t">
+<title id="t">Qwen3-4B-4bit on the iPhone 18 Pro Max, tokens/s of each iteration during 100 s of continuous generation. Run 1 (in a case, no cooler) holds 44.5 for about 40 s, then drops to about 39 and ends at 39.5 while the thermal state rises from 1 to 2. Run 2 (no case, external cooler) stays at 44.7 with thermal state 0.</title>
+<style>
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif; }
+.mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+.tx { fill: #ecece8; }
+.mu { fill: #9b9a94; }
+.clay { fill: #d97757; }
+.sage { fill: #9bb07c; }
+.eyebrow { font-size: 22px; letter-spacing: 4px; }
+.title { font-weight: 700; letter-spacing: -1.5px; }
+.tag { font-size: 28px; }
+.node { font-size: 24px; font-weight: 600; }
+.sub { font-size: 22px; }
+.cap { font-size: 22px; }
+.small { font-size: 20px; }
+.num { font-variant-numeric: tabular-nums; }
+.tick { font-size: 22px; }
+.lab { font-size: 22px; }
+.labb { font-weight: 600; }
+</style>
+<rect x="0.5" y="0.5" width="1279" height="539" rx="20" fill="#181818" stroke="#2f2f2f" stroke-width="1"/>
+<g stroke="#2a2a2a" stroke-width="1.5" fill="none">
+<line x1="128" y1="288.3" x2="1084" y2="288.3"/>
+<line x1="128" y1="165.2" x2="1084" y2="165.2"/>
+<line x1="308.4" y1="116" x2="308.4" y2="436"/>
+<line x1="488.8" y1="116" x2="488.8" y2="436"/>
+<line x1="669.1" y1="116" x2="669.1" y2="436"/>
+<line x1="849.5" y1="116" x2="849.5" y2="436"/>
+<line x1="1029.9" y1="116" x2="1029.9" y2="436"/>
+</g>
+<path d="M128 116 V436 H1084" fill="none" stroke="#4b4a46" stroke-width="1.5"/>
+<text class="sans tick mu num" x="112" y="419.4" text-anchor="end">35</text>
+<text class="sans tick mu num" x="112" y="296.3" text-anchor="end">40</text>
+<text class="sans tick mu num" x="112" y="173.2" text-anchor="end">45</text>
+<text class="sans tick mu num" x="128.0" y="474" text-anchor="middle">0 s</text>
+<text class="sans tick mu num" x="308.4" y="474" text-anchor="middle">20 s</text>
+<text class="sans tick mu num" x="488.8" y="474" text-anchor="middle">40 s</text>
+<text class="sans tick mu num" x="669.1" y="474" text-anchor="middle">60 s</text>
+<text class="sans tick mu num" x="849.5" y="474" text-anchor="middle">80 s</text>
+<text class="sans tick mu num" x="1029.9" y="474" text-anchor="middle">100 s</text>
+<text class="sans tick mu" x="40" y="64">Qwen3-4B-4bit on iPhone · tokens/s per iteration</text>
+<text class="sans tick mu" x="1084" y="518" text-anchor="end">time into the 100 s sustain phase</text>
+<path d="M180.9 173.3 L233.5 173.5 L286.3 176.3 L339.1 175.8 L391.8 173.1 L444.5 174.5 L497.3 177.4 L550.0 172.8 L602.6 172.5 L655.3 173.0 L707.9 173.2 L760.5 171.5 L813.1 172.5 L865.8 172.4 L918.5 173.8 L971.1 173.6 L1023.8 172.6 L1076.4 172.7" fill="none" stroke="#9bb07c" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="180.9" cy="173.3" r="4.5" fill="#9bb07c" stroke="#181818" stroke-width="2"/>
+<circle cx="233.5" cy="173.5" r="4.5" fill="#9bb07c" stroke="#181818" stroke-width="2"/>
+<circle cx="286.3" cy="176.3" r="4.5" fill="#9bb07c" stroke="#181818" stroke-width="2"/>
+<circle cx="339.1" cy="175.8" r="4.5" fill="#9bb07c" stroke="#181818" stroke-width="2"/>
+<circle cx="391.8" cy="173.1" r="4.5" fill="#9bb07c" stroke="#181818" stroke-width="2"/>
+<circle cx="444.5" cy="174.5" r="4.5" fill="#9bb07c" stroke="#181818" stroke-width="2"/>
+<circle cx="497.3" cy="177.4" r="4.5" fill="#9bb07c" stroke="#181818" stroke-width="2"/>
+<circle cx="550.0" cy="172.8" r="4.5" fill="#9bb07c" stroke="#181818" stroke-width="2"/>
+<circle cx="602.6" cy="172.5" r="4.5" fill="#9bb07c" stroke="#181818" stroke-width="2"/>
+<circle cx="655.3" cy="173.0" r="4.5" fill="#9bb07c" stroke="#181818" stroke-width="2"/>
+<circle cx="707.9" cy="173.2" r="4.5" fill="#9bb07c" stroke="#181818" stroke-width="2"/>
+<circle cx="760.5" cy="171.5" r="4.5" fill="#9bb07c" stroke="#181818" stroke-width="2"/>
+<circle cx="813.1" cy="172.5" r="4.5" fill="#9bb07c" stroke="#181818" stroke-width="2"/>
+<circle cx="865.8" cy="172.4" r="4.5" fill="#9bb07c" stroke="#181818" stroke-width="2"/>
+<circle cx="918.5" cy="173.8" r="4.5" fill="#9bb07c" stroke="#181818" stroke-width="2"/>
+<circle cx="971.1" cy="173.6" r="4.5" fill="#9bb07c" stroke="#181818" stroke-width="2"/>
+<circle cx="1023.8" cy="172.6" r="4.5" fill="#9bb07c" stroke="#181818" stroke-width="2"/>
+<circle cx="1076.4" cy="172.7" r="4.5" fill="#9bb07c" stroke="#181818" stroke-width="2"/>
+<path d="M180.9 176.8 L233.8 177.0 L286.6 177.6 L339.5 178.3 L392.5 179.6 L445.4 179.1 L499.9 209.4 L559.9 303.9 L620.2 308.2 L680.1 301.8 L740.0 301.9 L804.1 366.7 L864.4 309.4 L924.6 305.8 L984.5 303.1 L1044.4 301.3" fill="none" stroke="#d97757" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="180.9" cy="176.8" r="4.5" fill="#d97757" stroke="#181818" stroke-width="2"/>
+<circle cx="233.8" cy="177.0" r="4.5" fill="#d97757" stroke="#181818" stroke-width="2"/>
+<circle cx="286.6" cy="177.6" r="4.5" fill="#d97757" stroke="#181818" stroke-width="2"/>
+<circle cx="339.5" cy="178.3" r="4.5" fill="#d97757" stroke="#181818" stroke-width="2"/>
+<circle cx="392.5" cy="179.6" r="4.5" fill="#d97757" stroke="#181818" stroke-width="2"/>
+<circle cx="445.4" cy="179.1" r="4.5" fill="#d97757" stroke="#181818" stroke-width="2"/>
+<circle cx="499.9" cy="209.4" r="4.5" fill="#d97757" stroke="#181818" stroke-width="2"/>
+<circle cx="559.9" cy="303.9" r="4.5" fill="#d97757" stroke="#181818" stroke-width="2"/>
+<circle cx="620.2" cy="308.2" r="4.5" fill="#d97757" stroke="#181818" stroke-width="2"/>
+<circle cx="680.1" cy="301.8" r="4.5" fill="#d97757" stroke="#181818" stroke-width="2"/>
+<circle cx="740.0" cy="301.9" r="4.5" fill="#d97757" stroke="#181818" stroke-width="2"/>
+<circle cx="804.1" cy="366.7" r="4.5" fill="#d97757" stroke="#181818" stroke-width="2"/>
+<circle cx="864.4" cy="309.4" r="4.5" fill="#d97757" stroke="#181818" stroke-width="2"/>
+<circle cx="924.6" cy="305.8" r="4.5" fill="#d97757" stroke="#181818" stroke-width="2"/>
+<circle cx="984.5" cy="303.1" r="4.5" fill="#d97757" stroke="#181818" stroke-width="2"/>
+<circle cx="1044.4" cy="301.3" r="4.5" fill="#d97757" stroke="#181818" stroke-width="2"/>
+<text class="sans lab labb num" x="1098.4" y="180.7" fill="#9bb07c">44.7</text>
+<text class="sans lab labb num" x="1098.4" y="309.3" fill="#d97757">39.5</text>
+<text class="sans lab mu" x="569.9" y="146.6"><tspan class="labb sage">run 2</tspan> · no case, external cooler · thermal state 0</text>
+<text class="sans lab mu" x="569.9" y="269.1"><tspan class="labb clay">run 1</tspan> · in a case, no cooler · thermal state 1 → 2</text>
+</svg>
